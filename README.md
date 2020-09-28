@@ -6,7 +6,7 @@ Heavily based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-
 
 `strftime` was cut out along with any time-related functions.
 
-### How to develop:
+#### How to develop:
 * `pip install -r requirements.txt`
 * set your MySQL credentials in `utils/functions.py`
 * run initial schema from `schema_mysql.sql`
