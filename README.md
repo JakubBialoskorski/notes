@@ -1,4 +1,4 @@
-# Notes
+# Notty
 
 Flask notes app with MySQL as a backend.
 
