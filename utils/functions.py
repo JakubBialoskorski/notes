@@ -43,20 +43,6 @@ def check_user_exists(username, password):
         return False
 
 
-#def store_last_login(user_id):
-#    '''
-#        Checks whether a user exists with the specified username and password
-#    '''
-#    conn = get_database_connection()
-#    try:
-#        cursor = conn.cursor()
-#        cursor.execute("UPDATE users SET last_login=(strftime('%Y-%m-%d %H:%M:%S', 'now', 'localtime')) WHERE id=%s", (user_id, ))
-#        conn.commit()
-#        cursor.close()
-#    except:
-#        cursor.close()
-
-
 def check_username(username):
     '''
         Checks whether a username is already taken or not
@@ -188,7 +174,6 @@ def edit_note(note_title, note, note_markdown, tags, note_id):
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
-        # print("UPDATE notes SET note_title=?, note=?, note_markdown=?, tags=? WHERE id=?", (note_title, note, note_markdown, tags, note_id))
         cursor.execute("UPDATE notes SET note_title=%s, note=%s, note_markdown=%s, tags=%s WHERE id=%s", (note_title, note, note_markdown, tags, note_id))
         conn.commit()
         cursor.close()
@@ -278,7 +263,6 @@ def get_tag_using_note_id(id):
         cursor = conn.cursor()
         cursor.execute('SELECT tags FROM notes WHERE id=%s', (str(id), ))
         results = cursor.fetchall()
-        # results = [(str(results[i][0]), results[i][1]) for i in range(len(results))]
         results = results[0][0].split(',')
         cursor.close()
         return results
