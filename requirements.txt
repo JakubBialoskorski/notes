@@ -17,3 +17,4 @@ Werkzeug==0.12.2
 WTForms==2.1
 sqlalchemy
 gunicorn
+mysqlclient
