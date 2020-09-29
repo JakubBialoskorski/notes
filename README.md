@@ -11,3 +11,6 @@ Heavily based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-
 * set your MySQL credentials in `utils/functions.py`
 * run initial schema from `schema_mysql.sql`
 * `python manage.py`
+
+#### How to run in Docker:
+* `docker run -d -p 80:80 --restart=always notty`
