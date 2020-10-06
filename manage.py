@@ -16,7 +16,6 @@ from utils.decorators import login_required
 from flask_pagedown import PageDown
 from flask import Markup
 import utils.functions as functions
-import datetime
 import markdown
 import random
 
