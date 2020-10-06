@@ -38,9 +38,10 @@ def check_user_exists(username, password):
         result = cursor.fetchone()
         if result:
             return result[0]
+            cursor.close()
     except:
         return False
-    cursor.close()
+        cursor.close()
 
 
 def check_username(username):
@@ -53,9 +54,10 @@ def check_username(username):
         cursor.execute('SELECT * FROM users WHERE username=%s', (username, ))
         if cursor.fetchone():
             return True
+            cursor.close()
     except:
         return False
-    cursor.close()
+        cursor.close()
 
 
 def signup_user(username, password, email):
