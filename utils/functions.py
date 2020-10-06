@@ -13,19 +13,18 @@ def get_database_connection():
     return conn
 
 
-def get_user_count():
-    '''
-        Checks whether a user exists with the specified username and password
-    '''
-    conn = get_database_connection()
-    try:
-        cursor = conn.cursor()
-        cursor.execute('SELECT COUNT(*) FROM users')
-        result = cursor.fetchone()
-        if result:
-            return result[0]
-    except:
-        return False
+#def get_user_count():
+#    '''
+#        Checks whether a user exists with the specified username and password
+#    '''
+#    conn = get_database_connection()
+#    try:
+#        cursor = conn.cursor()
+#        cursor.execute('SELECT COUNT(*) FROM users')
+#        result = cursor.fetchone()
+#        if result:
+#    except:
+#       return False
 
 
 def check_user_exists(username, password):
@@ -41,6 +40,7 @@ def check_user_exists(username, password):
             return result[0]
     except:
         return False
+    cursor.close()
 
 
 def check_username(username):
@@ -55,6 +55,7 @@ def check_username(username):
             return True
     except:
         return False
+    cursor.close()
 
 
 def signup_user(username, password, email):

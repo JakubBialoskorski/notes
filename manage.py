@@ -30,7 +30,7 @@ def home_page():
     '''
         App for hompage
     '''
-    session['user_count'] = functions.get_user_count()
+    #session['user_count'] = functions.get_user_count()
     try:
         if session['username']:
             return render_template('homepage.html', username=session['username'])
