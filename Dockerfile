@@ -1,5 +1,7 @@
 FROM docker.io/python:3.7
 
+ENV SQLALCHEMY_CONFIG='mysql://USER:PASSWORD@DATABASE_URI/DATABASE_NAME'
+
 ADD static /app/static
 ADD templates /app/templates
 ADD utils /app/utils
