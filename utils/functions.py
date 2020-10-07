@@ -8,7 +8,7 @@ def get_database_connection():
         Creates a connection between selected database
     '''
 
-    engine = create_engine(os.environ['SQLALCHEMY_CONFIG'], pool_size=25, max_overflow=-1, timeout=30)
+    engine = create_engine(os.environ['SQLALCHEMY_CONFIG'], pool_size=25, max_overflow=-1)
     conn = engine.raw_connection()
     return conn
 
