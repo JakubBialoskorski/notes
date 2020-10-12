@@ -28,7 +28,7 @@ app.secret_key = str(random.randint(1, 20))
 @app.route('/')
 def home_page():
     '''
-        App for hompage
+        Route for hompage
     '''
     #session['user_count'] = functions.get_user_count()
     try:
@@ -38,12 +38,11 @@ def home_page():
     except (KeyError, ValueError):
         return render_template('homepage.html')
 
-
 @app.route('/profile/')
 @login_required
 def profile():
     '''
-        App for user profile can only be accessed only after successful login
+        Route for user profile, can only be accessed only after successful login
     '''
     if request.method == 'GET':
         notes = functions.get_data_using_user_id(session['id'])
@@ -65,11 +64,10 @@ def profile():
             tags=tags
         )
 
-
 @app.route('/login/', methods=('GET', 'POST'))
 def login():
     '''
-        App for creating Login page
+        Route for creating login page
     '''
     form = LoginForm()
     if form.validate_on_submit():
@@ -79,17 +77,15 @@ def login():
         if user_id:
             session['username'] = username
             session['id'] = user_id
-            #functions.store_last_login(session['id'])
             return redirect('/profile/')
         else:
             flash('Username/Password Incorrect!')
     return render_template('login.html', form=form)
 
-
 @app.route('/signup/', methods=('GET', 'POST'))
 def signup():
     '''
-        App for registering new user
+        Route for registering new user
     '''
     form = SignUpForm()
     if form.validate_on_submit():
@@ -107,22 +103,20 @@ def signup():
             return redirect('/profile/')
     return render_template('signup.html', form=form)
 
-
 @app.route("/logout/")
 def logout():
     '''
-        App for logging out user
+        Route for logging out user
     '''
     session['username'] = None
     session['id'] = None
     return login()
 
-
 @app.route("/notes/add/", methods=['GET', 'POST'])
 @login_required
 def add_note():
     '''
-        App for adding note
+        Route for adding note
     '''
     form = AddNoteForm()
     form.tags.choices = functions.get_all_tags(session['id'])
@@ -145,22 +139,20 @@ def add_note():
         return redirect('/profile/')
     return render_template('add_note.html', form=form, username=session['username'])
 
-
 @app.route("/notes/<id>/")
 @login_required
 def view_note(id):
     '''
-        App for viewing a specific note
+        Route for viewing a specific note
     '''
     notes = functions.get_data_using_id(id)
     return render_template('view_note.html', notes=notes, username=session['username'])
-
 
 @app.route("/notes/edit/<note_id>/", methods=['GET', 'POST'])
 @login_required
 def edit_note(note_id):
     '''
-        App for editing a particular note
+        Route for editing a particular note
     '''
     form = AddNoteForm()
     form.tags.choices = functions.get_all_tags(session['id'])
@@ -191,12 +183,11 @@ def edit_note(note_id):
         functions.edit_note(note_title, note, note_markdown, tags, note_id=note_id)
         return redirect('/profile/')
 
-
 @app.route("/notes/delete/<id>/", methods=['GET', 'POST'])
 @login_required
 def delete_note(id):
     '''
-        App for viewing a specific note
+        Route for viewing a specific note
     '''
     functions.delete_note_using_id(id)
     notes = functions.get_data_using_user_id(session['id'])
@@ -213,12 +204,11 @@ def delete_note(id):
             tags.append(', '.join(temp_list))
     return render_template('profile.html', delete=True, tags=tags, username=session['username'], notes=notes)
 
-
 @app.route("/tags/add/", methods=['GET', 'POST'])
 @login_required
 def add_tag():
     '''
-        App for adding a tag
+        Route for adding a tag
     '''
     form = AddTagForm()
     if form.validate_on_submit():
@@ -227,22 +217,20 @@ def add_tag():
         return redirect('/tags/')
     return render_template('add_tag.html', form=form, username=session['username'])
 
-
 @app.route("/tags/")
 @login_required
 def view_tag():
     '''
-        App for viewing all available tags
+        Route for viewing all available tags
     '''
     tags = functions.get_all_tags(session['id'])
     return render_template('edit_tag.html', tags=tags, username=session['username'])
-
 
 @app.route("/tags/view/<tag_id>")
 @login_required
 def view_notes_using_tag(tag_id):
     '''
-        App for viewing all available notes tagged under specific tag
+        Route for viewing all available notes tagged under specific tag
     '''
     notes = functions.get_notes_using_tag_id(tag_id, session['id'])
     tag_name = functions.get_tagname_using_tag_id(tag_id)
@@ -253,33 +241,21 @@ def view_notes_using_tag(tag_id):
         tag_name=tag_name
     )
 
-
 @app.route("/tags/delete/<tag_id>/")
 @login_required
 def delete_tag(tag_id):
     '''
-        App for deleting a specific tag
+        Route for deleting a specific tag
     '''
     functions.delete_tag_using_id(tag_id)
     tags = functions.get_all_tags(session['id'])
     return render_template('edit_tag.html', tags=tags, delete=True, username=session['username'])
 
-
-# Custom Filter
-#@app.template_filter()
-#def custom_date(date):
-#    '''
-#        Convert a datetime into custom format like: Sep 12,2017 19:07:32
-#    '''
-#    date = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
-#    return date.strftime('%b %d,%Y %H:%M:%S')
-
-
 @app.route("/profile/settings/")
 @login_required
 def profile_settings():
     '''
-        App for getting profile settings for a user
+        Route for getting profile settings for a user
     '''
     user_data = functions.get_user_data(session['id'])
     notes_count = functions.get_number_of_notes(session['id'])
@@ -292,12 +268,11 @@ def profile_settings():
         tag_count=tag_count
     )
 
-
 @app.route("/profile/settings/change_email/", methods=['GET', 'POST'])
 @login_required
 def change_email():
     '''
-        App for changing the email of a user
+        Route for changing the email of a user
     '''
     form = ChangeEmailForm()
     if form.validate_on_submit():
@@ -306,12 +281,11 @@ def change_email():
         return redirect('/profile/settings/')
     return render_template('change_email.html', form=form, username=session['username'])
 
-
 @app.route("/profile/settings/change_password/", methods=['GET', 'POST'])
 @login_required
 def change_password():
     '''
-        App for changing the password of a user
+        Route for changing the password of a user
     '''
     form = ChangePasswordForm()
     if form.validate_on_submit():
@@ -320,11 +294,10 @@ def change_password():
         return redirect('/profile/settings/')
     return render_template('change_password.html', form=form, username=session['username'])
 
-
 @app.route('/background_process/')
 def background_process():
     '''
-        App for handling AJAX request for searching notes
+        Route for handling AJAX request for searching notes
     '''
     try:
         notes = request.args.get('notes')
@@ -338,7 +311,6 @@ def background_process():
     except Exception as e:
         return str(e)
 
-
 class GetDataUsingUserID(Resource):
     def post(self):
         try:
@@ -347,7 +319,6 @@ class GetDataUsingUserID(Resource):
             password = functions.generate_password_hash(args['password'])
             user_id = functions.check_user_exists(username, password)
             if user_id:
-                #functions.store_last_login(user_id)
                 return functions.get_rest_data_using_user_id(user_id)
             else:
                 return {'error': 'You cannot access this page, please check username and password'}
@@ -358,6 +329,5 @@ api.add_resource(GetDataUsingUserID, '/api/')
 parser.add_argument('username')
 parser.add_argument('password')
 
-
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run()

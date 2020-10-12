@@ -2,7 +2,6 @@ import os
 import hashlib
 from sqlalchemy import create_engine
 
-
 def get_database_connection():
     '''
         Creates a connection between selected database
@@ -11,21 +10,6 @@ def get_database_connection():
     engine = create_engine(os.environ['SQLALCHEMY_CONFIG'], pool_size=25, max_overflow=5, pool_recycle=300, connect_args={'connect_timeout': 10})
     conn = engine.raw_connection()
     return conn
-
-
-#def get_user_count():
-#    '''
-#        Checks whether a user exists with the specified username and password
-#    '''
-#    conn = get_database_connection()
-#    try:
-#        cursor = conn.cursor()
-#        cursor.execute('SELECT COUNT(*) FROM users')
-#        result = cursor.fetchone()
-#        if result:
-#    except:
-#       return False
-
 
 def check_user_exists(username, password):
     '''
@@ -43,7 +27,6 @@ def check_user_exists(username, password):
         return False
         cursor.close()
 
-
 def check_username(username):
     '''
         Checks whether a username is already taken or not
@@ -59,7 +42,6 @@ def check_username(username):
         return False
         cursor.close()
 
-
 def signup_user(username, password, email):
     '''
         Function for storing the details of a user into the database
@@ -74,7 +56,6 @@ def signup_user(username, password, email):
         return
     except:
         cursor.close()
-
 
 def get_user_data(user_id):
     '''
@@ -92,7 +73,6 @@ def get_user_data(user_id):
     except:
         cursor.close()
 
-
 def get_data_using_user_id(id):
     '''
         Function for getting the data of all notes using user_id
@@ -109,7 +89,6 @@ def get_data_using_user_id(id):
     except:
         cursor.close()
 
-
 def get_data_using_id(id):
     '''
         Function for retrieving data of a specific note using its id
@@ -123,7 +102,6 @@ def get_data_using_id(id):
         return results
     except:
         cursor.close()
-
 
 def get_number_of_notes(id):
     '''
@@ -139,7 +117,6 @@ def get_number_of_notes(id):
     except:
         cursor.close()
 
-
 def get_data():
     '''
         Function for getting data of all notes
@@ -153,7 +130,6 @@ def get_data():
         return results
     except:
         cursor.close()
-
 
 def add_note(note_title, note, note_markdown, tags, user_id):
     '''
@@ -169,10 +145,9 @@ def add_note(note_title, note, note_markdown, tags, user_id):
     except:
         cursor.close()
 
-
 def edit_note(note_title, note, note_markdown, tags, note_id):
     '''
-        Function for adding note into the database
+        Function for editing note in the database
     '''
     conn = get_database_connection()
     try:
@@ -184,10 +159,9 @@ def edit_note(note_title, note, note_markdown, tags, note_id):
     except:
         cursor.close()
 
-
 def delete_note_using_id(id):
     '''
-        Function for deleting a specific note using its id
+        Function for deleting a specific note using it's id
     '''
     conn = get_database_connection()
     try:
@@ -199,14 +173,12 @@ def delete_note_using_id(id):
     except:
         cursor.close()
 
-
 def generate_password_hash(password):
     '''
         Function for generating a password hash
     '''
     hashed_value = hashlib.md5(password.encode())
     return hashed_value.hexdigest()
-
 
 def add_tag(tag, user_id):
     '''
@@ -221,7 +193,6 @@ def add_tag(tag, user_id):
         return
     except:
         cursor.close()
-
 
 def get_all_tags(user_id):
     '''
@@ -241,7 +212,6 @@ def get_all_tags(user_id):
     except:
         cursor.close()
 
-
 def get_data_using_tag_id(tag_id):
     '''
         Function for getting all tags for a specific user
@@ -255,7 +225,6 @@ def get_data_using_tag_id(tag_id):
         return results
     except:
         cursor.close()
-
 
 def get_tag_using_note_id(id):
     '''
@@ -272,7 +241,6 @@ def get_tag_using_note_id(id):
     except:
         cursor.close()
 
-
 def get_tagname_using_tag_id(tag_id):
     '''
         Get the tag name using tag id
@@ -286,7 +254,6 @@ def get_tagname_using_tag_id(tag_id):
         return ''.join(results)
     except:
         cursor.close()
-
 
 def delete_tag_using_id(tag_id):
     '''
@@ -302,7 +269,6 @@ def delete_tag_using_id(tag_id):
     except:
         cursor.close()
 
-
 def get_number_of_tags(id):
     '''
         Function for retrieving number of tags stored by a specific user
@@ -316,7 +282,6 @@ def get_number_of_tags(id):
         return results
     except:
         cursor.close()
-
 
 def get_notes_using_tag_id(tag_id, username):
     '''
@@ -332,10 +297,9 @@ def get_notes_using_tag_id(tag_id, username):
     except:
         cursor.close()
 
-
 def edit_email(email, user_id):
     '''
-        Function for adding note into the database
+        Function for editing user email in the database
     '''
     conn = get_database_connection()
     try:
@@ -347,10 +311,9 @@ def edit_email(email, user_id):
     except:
         cursor.close()
 
-
 def edit_password(password, user_id):
     '''
-        Function for adding note into the database
+        Function for editing password in the database
     '''
     conn = get_database_connection()
     password = generate_password_hash(password)
@@ -362,7 +325,6 @@ def edit_password(password, user_id):
         return
     except:
         cursor.close()
-
 
 def get_search_data(pattern, user_id):
     '''
@@ -378,7 +340,6 @@ def get_search_data(pattern, user_id):
         return results
     except:
         cursor.close()
-
 
 def get_rest_data_using_user_id(id):
     '''
