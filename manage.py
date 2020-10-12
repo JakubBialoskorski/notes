@@ -67,7 +67,7 @@ def profile():
 @app.route('/login/', methods=('GET', 'POST'))
 def login():
     '''
-        Route for creating login page
+        Route for login page
     '''
     form = LoginForm()
     if form.validate_on_submit():
@@ -187,7 +187,7 @@ def edit_note(note_id):
 @login_required
 def delete_note(id):
     '''
-        Route for viewing a specific note
+        Route for deleting a specific note
     '''
     functions.delete_note_using_id(id)
     notes = functions.get_data_using_user_id(session['id'])
