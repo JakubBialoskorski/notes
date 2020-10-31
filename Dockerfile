@@ -1,4 +1,4 @@
-FROM docker.io/python:3.7
+FROM docker.io/python:3.9
 
 ENV SQLALCHEMY_CONFIG='mysql://USER:PASSWORD@DATABASE_URI/DATABASE_NAME'
 
