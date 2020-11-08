@@ -333,9 +333,9 @@ def get_search_data(pattern, user_id):
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM notes WHERE user_id=%s AND note_markdown LIKE %s LIMIT 3", (user_id, '%' + pattern + '%'))
+        cursor.execute("SELECT * FROM notes WHERE user_id=%s AND note_title LIKE %s LIMIT 3", (user_id, '%' + pattern + '%'))
         results = cursor.fetchall()
-        results = [(results[i][0], results[i][3]) for i in range(len(results))]
+        results = [(results[i][0], results[i][1]) for i in range(len(results))]
         cursor.close()
         return results
     except:
