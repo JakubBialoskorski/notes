@@ -35,7 +35,7 @@
                     {{ tags[loop.index0] }}
                 </td>
                 <td class="text-center">
-                    <a href="/notes/delete/{{ note[0] }}/"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a href="/notes/delete/{{ note[0] }}/"><span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure to delete this note?')"></span></a>
                 </td>
             </tr>
             {%  endfor %}
