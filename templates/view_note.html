@@ -21,7 +21,7 @@
                     </a>
 
                     <a href="/notes/delete/{{ note[0] }}/" class="pull-right">
-                        <button type="button" class="btn btn-danger">
+                        <button type="button" class="btn btn-danger" onclick="return confirm('Are you sure to delete this note?')">
                             <span class="glyphicon glyphicon-trash"></span> Delete
                         </button>
                     </a>

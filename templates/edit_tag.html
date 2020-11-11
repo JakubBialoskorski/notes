@@ -31,7 +31,7 @@
                                     <td class="text-center">{{ loop.index }}</td>
                                     <td><a href="/tags/view/{{ tag[0] }}">{{ tag[1] }}</a></td>
                                     <td class="text-center">
-                                        <a href="/tags/delete/{{ tag[0] }}/"><span class="glyphicon glyphicon-trash"></span></a>
+                                        <a href="/tags/delete/{{ tag[0] }}/"><span class="glyphicon glyphicon-trash" onclick="return confirm('Are you sure to delete this tag?')"></span></a>
                                     </td>
                                 </tr>
                             {%  endfor %}
