@@ -8,9 +8,13 @@ Heavily based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-
 
 #### How to develop:
 * `pip install -r requirements.txt`
+* create a database with `utf8mb4` charset and `utf8mb4_unicode_ci` collation
 * set your MySQL credentials in `utils/functions.py`
 * run initial schema from `schema_mysql.sql`
 * `python manage.py`
 
-#### How to run in Docker:
-* `docker run -d -p 80:80 --restart=always notty`
+#### How to run locally in Docker:
+* `docker build . -t notty-development`
+* `docker run -d -p 80:80 -e SQLALCHEMY_CONFIG='mysql://USER:PASSWORD@DATABASE_IP/DATABASE_NAME' notty-development`
+
+SQLALCHEMY_CONFIG can be put into Jenkins as build parameter.
