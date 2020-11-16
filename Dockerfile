@@ -8,6 +8,7 @@ ADD utils /app/utils
 ADD manage.py /app
 ADD Procfile /app
 ADD requirements.txt /app
+ADD tests.py /app
 
 WORKDIR /app
 
