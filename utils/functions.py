@@ -3,18 +3,11 @@ import hashlib
 from sqlalchemy import create_engine
 
 def get_database_connection():
-    '''
-        Creates a connection between selected database
-    '''
-
     engine = create_engine((os.environ['SQLALCHEMY_CONFIG']+'?charset=utf8mb4'), pool_size=25, max_overflow=5, pool_recycle=300, connect_args={'connect_timeout': 10})
     conn = engine.raw_connection()
     return conn
 
 def check_user_exists(username, password):
-    '''
-        Checks whether a user exists with the specified username and password
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -28,9 +21,6 @@ def check_user_exists(username, password):
         cursor.close()
 
 def check_username(username):
-    '''
-        Checks whether a username is already taken or not
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -43,10 +33,6 @@ def check_username(username):
         cursor.close()
 
 def signup_user(username, password, email):
-    '''
-        Function for storing the details of a user into the database
-        while registering
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -58,9 +44,6 @@ def signup_user(username, password, email):
         cursor.close()
 
 def get_user_data(user_id):
-    '''
-        Function for getting the data of a specific user using his user_id
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -74,9 +57,6 @@ def get_user_data(user_id):
         cursor.close()
 
 def get_data_using_user_id(id):
-    '''
-        Function for getting the data of all notes using user_id
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -90,9 +70,6 @@ def get_data_using_user_id(id):
         cursor.close()
 
 def get_data_using_id(id):
-    '''
-        Function for retrieving data of a specific note using its id
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -104,9 +81,6 @@ def get_data_using_id(id):
         cursor.close()
 
 def get_number_of_notes(id):
-    '''
-        Function for retrieving number of notes stored by a specific user
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -118,9 +92,6 @@ def get_number_of_notes(id):
         cursor.close()
 
 def get_data():
-    '''
-        Function for getting data of all notes
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -132,9 +103,6 @@ def get_data():
         cursor.close()
 
 def add_note(note_title, note, note_markdown, tags, user_id):
-    '''
-        Function for adding note into the database
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -146,9 +114,6 @@ def add_note(note_title, note, note_markdown, tags, user_id):
         cursor.close()
 
 def edit_note(note_title, note, note_markdown, tags, note_id):
-    '''
-        Function for editing note in the database
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -160,9 +125,6 @@ def edit_note(note_title, note, note_markdown, tags, note_id):
         cursor.close()
 
 def delete_note_using_id(id):
-    '''
-        Function for deleting a specific note using it's id
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -174,16 +136,10 @@ def delete_note_using_id(id):
         cursor.close()
 
 def generate_password_hash(password):
-    '''
-        Function for generating a password hash
-    '''
     hashed_value = hashlib.md5(password.encode())
     return hashed_value.hexdigest()
 
 def add_tag(tag, user_id):
-    '''
-        Function for adding a tag into the database
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -195,9 +151,6 @@ def add_tag(tag, user_id):
         cursor.close()
 
 def get_all_tags(user_id):
-    '''
-        Function for getting all tags for a specific user
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -213,9 +166,6 @@ def get_all_tags(user_id):
         cursor.close()
 
 def get_data_using_tag_id(tag_id):
-    '''
-        Function for getting all tags for a specific user
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -227,9 +177,6 @@ def get_data_using_tag_id(tag_id):
         cursor.close()
 
 def get_tag_using_note_id(id):
-    '''
-        Get the tags associated with each note
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -242,9 +189,6 @@ def get_tag_using_note_id(id):
         cursor.close()
 
 def get_tagname_using_tag_id(tag_id):
-    '''
-        Get the tag name using tag id
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -256,9 +200,6 @@ def get_tagname_using_tag_id(tag_id):
         cursor.close()
 
 def delete_tag_using_id(tag_id):
-    '''
-        Function for deleting a specific tag using its id
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -270,9 +211,6 @@ def delete_tag_using_id(tag_id):
         cursor.close()
 
 def get_number_of_tags(id):
-    '''
-        Function for retrieving number of tags stored by a specific user
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -284,9 +222,6 @@ def get_number_of_tags(id):
         cursor.close()
 
 def get_notes_using_tag_id(tag_id, username):
-    '''
-        Function for retrieving notes stored by a specific tag
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -298,9 +233,6 @@ def get_notes_using_tag_id(tag_id, username):
         cursor.close()
 
 def edit_email(email, user_id):
-    '''
-        Function for editing user email in the database
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -312,9 +244,6 @@ def edit_email(email, user_id):
         cursor.close()
 
 def edit_password(password, user_id):
-    '''
-        Function for editing password in the database
-    '''
     conn = get_database_connection()
     password = generate_password_hash(password)
     try:
@@ -327,9 +256,6 @@ def edit_password(password, user_id):
         cursor.close()
 
 def get_search_data(pattern, user_id):
-    '''
-        Function for searching note based on specified pattern
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()
@@ -342,9 +268,6 @@ def get_search_data(pattern, user_id):
         cursor.close()
 
 def get_rest_data_using_user_id(id):
-    '''
-        Function for getting the data of all notes using user_id using REST
-    '''
     conn = get_database_connection()
     try:
         cursor = conn.cursor()

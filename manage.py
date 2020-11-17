@@ -27,10 +27,6 @@ app.secret_key = str(random.randint(1, 20))
 
 @app.route('/')
 def home_page():
-    '''
-        Route for hompage
-    '''
-    #session['user_count'] = functions.get_user_count()
     try:
         if session['username']:
             return render_template('homepage.html', username=session['username'])
@@ -41,9 +37,6 @@ def home_page():
 @app.route('/profile/')
 @login_required
 def profile():
-    '''
-        Route for user profile, can only be accessed only after successful login
-    '''
     if request.method == 'GET':
         notes = functions.get_data_using_user_id(session['id'])
         tags = []
@@ -66,9 +59,6 @@ def profile():
 
 @app.route('/login/', methods=('GET', 'POST'))
 def login():
-    '''
-        Route for login page
-    '''
     form = LoginForm()
     if form.validate_on_submit():
         username = request.form['username']
@@ -84,9 +74,6 @@ def login():
 
 @app.route('/signup/', methods=('GET', 'POST'))
 def signup():
-    '''
-        Route for registering new user
-    '''
     form = SignUpForm()
     if form.validate_on_submit():
         username = request.form['username']
@@ -105,9 +92,6 @@ def signup():
 
 @app.route("/logout/")
 def logout():
-    '''
-        Route for logging out user
-    '''
     session['username'] = None
     session['id'] = None
     return login()
@@ -115,26 +99,19 @@ def logout():
 @app.route("/notes/add/", methods=['GET', 'POST'])
 @login_required
 def add_note():
-    '''
-        Route for adding note
-    '''
     form = AddNoteForm()
     form.tags.choices = functions.get_all_tags(session['id'])
-
     if form.tags.choices is None:
         form.tags = None
-
     if form.validate_on_submit():
         note_title = request.form['note_title']
         note_markdown = form.note.data
         note = Markup(markdown.markdown(note_markdown))
-
         try:
             tags = form.tags.data
             tags = ','.join(tags)
         except:
             tags = None
-
         functions.add_note(note_title, note, note_markdown, tags, session['id'])
         return redirect('/profile/')
     return render_template('add_note.html', form=form, username=session['username'])
@@ -142,26 +119,18 @@ def add_note():
 @app.route("/notes/<id>/")
 @login_required
 def view_note(id):
-    '''
-        Route for viewing a specific note
-    '''
     notes = functions.get_data_using_id(id)
     return render_template('view_note.html', notes=notes, username=session['username'])
 
 @app.route("/notes/edit/<note_id>/", methods=['GET', 'POST'])
 @login_required
 def edit_note(note_id):
-    '''
-        Route for editing a particular note
-    '''
     form = AddNoteForm()
     form.tags.choices = functions.get_all_tags(session['id'])
     form.tags.default = functions.get_tag_using_note_id(note_id)
     form.tags.process(request.form)
-
     if form.tags.choices is None:
         form.tags = None
-
     if request.method == 'GET':
         data = functions.get_data_using_id(note_id)
         form.note_id.data = note_id
@@ -172,13 +141,11 @@ def edit_note(note_id):
         note_id = form.note_id.data
         note_title = request.form['note_title']
         note_markdown = form.note.data
-
         try:
             tags = form.tags.data
             tags = ','.join(tags)
         except:
             tags = None
-
         note = Markup(markdown.markdown(note_markdown))
         functions.edit_note(note_title, note, note_markdown, tags, note_id=note_id)
         return redirect('/profile/')
@@ -186,9 +153,6 @@ def edit_note(note_id):
 @app.route("/notes/delete/<id>/", methods=['GET', 'POST'])
 @login_required
 def delete_note(id):
-    '''
-        Route for deleting a specific note
-    '''
     functions.delete_note_using_id(id)
     notes = functions.get_data_using_user_id(session['id'])
     tags = []
@@ -207,9 +171,6 @@ def delete_note(id):
 @app.route("/tags/add/", methods=['GET', 'POST'])
 @login_required
 def add_tag():
-    '''
-        Route for adding a tag
-    '''
     form = AddTagForm()
     if form.validate_on_submit():
         tag = request.form['tag']
@@ -220,18 +181,12 @@ def add_tag():
 @app.route("/tags/")
 @login_required
 def view_tag():
-    '''
-        Route for viewing all available tags
-    '''
     tags = functions.get_all_tags(session['id'])
     return render_template('edit_tag.html', tags=tags, username=session['username'])
 
 @app.route("/tags/view/<tag_id>")
 @login_required
 def view_notes_using_tag(tag_id):
-    '''
-        Route for viewing all available notes tagged under specific tag
-    '''
     notes = functions.get_notes_using_tag_id(tag_id, session['id'])
     tag_name = functions.get_tagname_using_tag_id(tag_id)
     return render_template(
@@ -244,9 +199,6 @@ def view_notes_using_tag(tag_id):
 @app.route("/tags/delete/<tag_id>/")
 @login_required
 def delete_tag(tag_id):
-    '''
-        Route for deleting a specific tag
-    '''
     functions.delete_tag_using_id(tag_id)
     tags = functions.get_all_tags(session['id'])
     return render_template('edit_tag.html', tags=tags, delete=True, username=session['username'])
@@ -254,9 +206,6 @@ def delete_tag(tag_id):
 @app.route("/profile/settings/")
 @login_required
 def profile_settings():
-    '''
-        Route for getting profile settings for a user
-    '''
     user_data = functions.get_user_data(session['id'])
     notes_count = functions.get_number_of_notes(session['id'])
     tag_count = functions.get_number_of_tags(session['id'])
@@ -271,9 +220,6 @@ def profile_settings():
 @app.route("/profile/settings/change_email/", methods=['GET', 'POST'])
 @login_required
 def change_email():
-    '''
-        Route for changing the email of a user
-    '''
     form = ChangeEmailForm()
     if form.validate_on_submit():
         email = request.form['email']
@@ -284,9 +230,6 @@ def change_email():
 @app.route("/profile/settings/change_password/", methods=['GET', 'POST'])
 @login_required
 def change_password():
-    '''
-        Route for changing the password of a user
-    '''
     form = ChangePasswordForm()
     if form.validate_on_submit():
         password = request.form['password']
@@ -296,9 +239,6 @@ def change_password():
 
 @app.route('/background_process/')
 def background_process():
-    '''
-        Route for handling AJAX request for searching notes
-    '''
     try:
         notes = request.args.get('notes')
         if notes == '':
