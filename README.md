@@ -7,7 +7,7 @@ Based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-Taking-W
 * `strftime` was cut out along with any time-related functions
 * all `delete` actions explicit confirmations
 * dockerized app and unit tests, easily deployable via CI/CD
-* support for `utfmb4` (special characters like `śćźżó` etc.)
+* support for `utfmb4` (special characters like `śćźżó` / emojis etc.)
 * bumped dependencies to match Snyk scans recommendations
 ---
 #### How to develop:
