@@ -22,3 +22,7 @@ Based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-Taking-W
 * `docker run -d -p 80:80 -e SQLALCHEMY_CONFIG='mysql://USER:PASSWORD@DATABASE_IP/DATABASE_NAME' notty-development`
 
 `SQLALCHEMY_CONFIG` can be put into Jenkins as build parameter to pass database credentials (though there are more secure methods).
+
+You can also use bash helpers to speed-up development:
+* Fill credentials in `build_and_run.sh` and run it to build the Dockerfile with `notty` as container name
+* `stop_and_destroy.sh` quickly does the obvious and you can proceed with another change 
