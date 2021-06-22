@@ -1,5 +1,7 @@
 # Notty
 
+[![Known Vulnerabilities](https://snyk.io/test/github/JakubBialoskorski/notty/badge.svg)](https://snyk.io/test/github/JakubBialoskorski/notty)
+
 Flask notes app with MySQL as a backend.
 ---
 Based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-Taking-Web-App) but with:
