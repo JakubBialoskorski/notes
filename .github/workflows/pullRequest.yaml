@@ -26,4 +26,4 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: ${{ secrets.DOCKERHUB_USERNAME }}/app:latest
-              run: docker exec notty python -m unittest discover
+          run: docker exec notty python -m unittest discover
