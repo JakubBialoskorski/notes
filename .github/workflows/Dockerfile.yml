@@ -23,7 +23,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run unit test
       run: | 
-        pwd
+        cd /home/runner/work/notty/
         python test.py
 
   docker:
