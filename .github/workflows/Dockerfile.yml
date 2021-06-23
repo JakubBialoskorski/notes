@@ -22,7 +22,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run unit test
-      run: python test.py
+      run: | 
+        cd /notty
+        python test.py
 
   docker:
     needs: build
