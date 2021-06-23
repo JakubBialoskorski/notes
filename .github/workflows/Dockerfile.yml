@@ -23,7 +23,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run unit test
       run: | 
-        cd /home/runner/work/notty/
+        cd /home/runner/work/notty/notty
         pwd
         ls
         python test.py
