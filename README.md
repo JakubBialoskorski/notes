@@ -13,6 +13,12 @@ Based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-Taking-W
 * bumped dependencies to match Snyk scans recommendations
 ---
 #### How to develop:
+* install [prerequisites](https://pypi.org/project/mysqlclient/):
+    * Linux: `sudo apt-get install python3-dev default-libmysqlclient-dev build-essential`
+    * MacOS:
+        * `brew install mysql-client`
+        * add `PATH="/usr/local/opt/mysql-client/bin:$PATH"` to .bashrc or .zshrc
+        * `source .zshrc` / `source .bashrc` or reload the terminal before next step
 * `pip install -r requirements.txt`
 * create a database with `utf8mb4` charset and `utf8mb4_unicode_ci` collation
 * set your MySQL credentials in `utils/functions.py`
@@ -25,6 +31,8 @@ Based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-Taking-W
 
 `SQLALCHEMY_CONFIG` can be put into Jenkins as build parameter to pass database credentials (though there are more secure methods).
 
+---
+#### Hacks:
 You can also use bash helpers to speed-up development:
 * Fill credentials in `build_and_run.sh` and run it to build the Dockerfile with `notty` as container name
 * `stop_and_destroy.sh` quickly does the obvious and you can proceed with another change 
