@@ -24,7 +24,6 @@ jobs:
     - name: Run unit test
       run: test.py
 
-jobs:
   docker:
     needs: build
     runs-on: ubuntu-latest
