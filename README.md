@@ -1,6 +1,6 @@
 # Notty
 
-[![Known Vulnerabilities](https://snyk.io/test/github/JakubBialoskorski/notty/badge.svg)](https://snyk.io/test/github/JakubBialoskorski/notty) [![Test and build a Dockerfile](https://github.com/JakubBialoskorski/notty/actions/workflows/Dockerfile.yml/badge.svg)](https://github.com/JakubBialoskorski/notty/actions/workflows/Dockerfile.yml)
+[![Known Vulnerabilities](https://snyk.io/test/github/JakubBialoskorski/notty/badge.svg)](https://snyk.io/test/github/JakubBialoskorski/notty) [![Test and build a Dockerfile](https://github.com/JakubBialoskorski/notty/actions/workflows/testAndBuildDockerfile.yml/badge.svg)](https://github.com/JakubBialoskorski/notty/actions/workflows/testAndBuildDockerfile.yml)
 
 Flask notes app with MySQL as a backend.
 ---
