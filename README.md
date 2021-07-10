@@ -8,8 +8,8 @@ Based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-Taking-W
 * MySQL / Aurora support (instead of local SQLite)
 * `strftime` was cut out along with any time-related functions
 * all `delete` actions explicit confirmations
-* dockerized app and unit tests, easily deployable via CI/CD
 * support for `utfmb4` (special characters like `śćźżó` / emojis etc.)
+* [multiarch Dockerfile](.github/workflows/testAndBuildDockerfile.yml): amd64, arm64, arm/v6, arm/v7 - deployable to K3S/K8S
 * bumped dependencies to match Snyk scans recommendations
 ---
 #### How to develop:
