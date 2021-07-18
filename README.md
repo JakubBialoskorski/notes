@@ -35,7 +35,7 @@ Based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-Taking-W
 #### Hacks:
 
 MySQL cheat sheet:
-* To create a database: `CREATE DATABASE notty CHARACTER SET utfmb4 COLLATE utfmb4_unicode_ci;`
+* To create a database: `CREATE DATABASE notty CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
 * To check charset and collation: `use notty;` and then `SELECT @@character_set_database, @@collation_database;`
 
 You can also use bash helpers to speed-up development:
