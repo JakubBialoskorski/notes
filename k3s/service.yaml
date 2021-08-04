@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: notty-svc
+  annotations:
+    metallb.universe.tf/address-pool: default
+    metallb.universe.tf/allow-shared-ip: notty-svc
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: notty
+  type: LoadBalancer

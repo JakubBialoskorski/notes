@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notty
+spec:
+  selector:
+    matchLabels:
+      app: notty
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: notty
+    spec:
+      containers:
+        - name: notty
+          image: jakubbialoskorski/notty
+          env:
+            - name: SQLALCHEMY_CONFIG
+              value: "mysql://USER:PASSWORD@DATABASE_IP/DATABASE_NAME"
+          ports:
+            - containerPort: 80
