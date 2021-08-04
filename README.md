@@ -13,7 +13,7 @@ Based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-Taking-W
 * bumped dependencies to match Snyk scans recommendations
 ---
 #### How to develop:
-* install [prerequisites](https://pypi.org/project/mysqlclient/):
+* install [prerequisites](https://pypi.org/project/mysqlclient):
     * Linux: `sudo apt-get install python3-dev default-libmysqlclient-dev build-essential`
     * MacOS:
         * `brew install mysql-client`
@@ -31,6 +31,13 @@ Based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-Taking-W
 
 `SQLALCHEMY_CONFIG` can be put into Jenkins as build parameter to pass database credentials (though there are more secure methods).
 
+---
+#### How to run in k3s:
+Adjust database parameters in `deployment.yaml` before proceeding.
+
+Assuming you have [MetalLB](https://metallb.universe.tf) configured in your cluster:
+* `kubectl apply -f service.yaml`
+* `kubectl apply -f deployment.yaml`
 ---
 #### Hacks:
 
