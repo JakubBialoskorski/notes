@@ -5,7 +5,7 @@
 Flask notes app with MySQL as a backend.
 ---
 Based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-Taking-Web-App) but with:
-* MySQL / Aurora support (instead of local SQLite)
+* MySQL / Aurora support (instead of local SQLite) with optional SSL/TLS
 * `strftime` was cut out along with any time-related functions
 * all `delete` actions explicit confirmations
 * support for `utfmb4` (special characters like `śćźżó` / emojis etc.)
@@ -45,6 +45,11 @@ MySQL cheat sheet:
 * To create a database: `CREATE DATABASE notty CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
 * To check charset and collation: `use notty;` and then `SELECT @@character_set_database, @@collation_database;`
 
-You can also use bash helpers to speed-up development:
+Aurora with SSL/TLS:
+* Enable custom parameter group with `require_secure_transport` set to `ON` and apply to your cluster
+* Alter service user with `ALTER USER 'encrypted_user'@'%' REQUIRE SSL;`
+* Add `?ssl=true` at the at the end of the database endpoint definition (point it to the writer instance).
+
+Quick development with bash helpers:
 * Fill credentials in `build_and_run.sh` and run it to build the Dockerfile with `notty` as container name
 * `stop_and_destroy.sh` quickly does the obvious and you can proceed with another change
