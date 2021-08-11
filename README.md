@@ -48,7 +48,7 @@ MySQL cheat sheet:
 Aurora with SSL/TLS:
 * Enable custom parameter group with `require_secure_transport` set to `ON` and apply to your cluster
 * Alter service user with `ALTER USER 'encrypted_user'@'%' REQUIRE SSL;`
-* Add `?ssl=true` at the at the end of the database endpoint definition (point it to the writer instance).
+* Add `?ssl=true` at the at the end of the database endpoint definition (point it to the writer instance)
 
 Quick development with bash helpers:
 * Fill credentials in `build_and_run.sh` and run it to build the Dockerfile with `notty` as container name
