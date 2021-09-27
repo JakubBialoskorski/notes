@@ -16,4 +16,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 80
 
-CMD gunicorn --workers=3 --threads=3 --bind 0.0.0.0:80 manage:app
+CMD gunicorn --threads=2 --bind 0.0.0.0:80 manage:app
