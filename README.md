@@ -7,7 +7,7 @@ Flask notes app with MySQL as a backend.
 
 ---
 
-[DEPRECATED]
+[**DEPRECATED**]
 
 Due to the lack of time and invention of great products like [Obsidian](https://obsidian.md/), I will no longer provide maintenance or support for this product.
 
