@@ -4,6 +4,17 @@
 
 Flask notes app with MySQL as a backend.
 ---
+
+---
+
+[DEPRECATED]
+
+Due to the lack of time and invention of great products like [Obsidian](https://obsidian.md/), I will no longer provide maintenance or support for this product.
+
+Feel free to fork it or improve as you see fit.
+
+---
+
 Based on [this repository](https://github.com/OmkarPathak/A-Simple-Note-Taking-Web-App) but with:
 * MySQL / Aurora support (instead of local SQLite) with optional SSL/TLS
 * `strftime` was cut out along with any time-related functions
